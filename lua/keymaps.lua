@@ -17,7 +17,7 @@ vim.cmd("command! -nargs=+ -complete=file LGrep " ..
 
 remap('', '<leader>ei', '<Esc>:NvimEditInit<CR>',   { silent = true })
 remap('', '<leader>ek', '<Esc>:NvimEditKeymap<CR>', { silent = true })
-remap('', '<leader>R',  "<Esc>:NvimRestart<CR>",    { silent = true })
+-- remap('', '<leader>R',  "<Esc>:NvimRestart<CR>",    { silent = true })
 
 -- Fix common typos
 vim.cmd([[
@@ -85,6 +85,9 @@ remap('n', '<leader>w|', ':vs<CR>', { noremap = true, silent = true })
 -- Delete window
 remap('n', '<leader>wd', ':quit<CR>', { noremap = true, silent = true })
 
+-- Save file in current window
+remap('n', '<leader>ws', ':w<CR>', { noremap = true, silent = true })
+
 -- Tab navigation
 remap('n', '[t',         ':tabprevious<CR>', { noremap = true })
 remap('n', ']t',         ':tabnext<CR>',     { noremap = true })
@@ -98,6 +101,9 @@ remap('n', '<Leader>tO', ':tabfirst<CR>:tabonly<CR>', { noremap = true })
 -- tmux <c-meta>z like
 remap('n', '<Leader>tz',  "<cmd>lua require'utils'.tabZ()<CR>", { noremap = true })
 
+-- Delete buffer
+remap('n', '<leader>bd', ':bw<CR>', { noremap = true, silent = true })
+
 -- Navigate buffers
 remap('n', '[b', ':bprevious<CR>',      { noremap = true })
 remap('n', ']b', ':bnext<CR>',          { noremap = true })
@@ -105,14 +111,14 @@ remap('n', '[B', ':bfirst<CR>',         { noremap = true })
 remap('n', ']B', ':blast<CR>',          { noremap = true })
 
 -- Quickfix list mappings
-remap('n', '<leader>q', "<cmd>lua require'utils'.toggle_qf('q')<CR>", { noremap = true })
+remap('n', '<leader>qq', "<cmd>lua require'utils'.toggle_qf('q')<CR>", { noremap = true })
 remap('n', '[q', ':cprevious<CR>',      { noremap = true })
 remap('n', ']q', ':cnext<CR>',          { noremap = true })
 remap('n', '[Q', ':cfirst<CR>',         { noremap = true })
 remap('n', ']Q', ':clast<CR>',          { noremap = true })
 
 -- Location list mappings
-remap('n', '<leader>Q', "<cmd>lua require'utils'.toggle_qf('l')<CR>", { noremap = true })
+remap('n', '<leader>ql', "<cmd>lua require'utils'.toggle_qf('l')<CR>", { noremap = true })
 remap('n', '[l', ':lprevious<CR>',      { noremap = true })
 remap('n', ']l', ':lnext<CR>',          { noremap = true })
 remap('n', '[L', ':lfirst<CR>',         { noremap = true })
@@ -155,3 +161,6 @@ remap('n', '<leader>|',
 
 -- Change current working dir (:pwd) to curent file's folderhttp://vimcasts.org/transcripts/61/en/
 remap('n', '<leader>%', '<Esc>:lua require"utils".set_cwd()<CR>', { noremap = true, silent = true })
+
+-- Quic neovim
+remap('n', '<leader>Q', ':qa<CR>', { noremap = true, silent = true })

@@ -113,6 +113,10 @@ local keymaps = {
         ['|']       = 'toggle color column on/off',
         ['\'']      = "toggle 'listchars' on/off",
         ['c.']      = 'search and replace WORD under cursor',
+        b = {
+                name = '+buffer',
+                d = 'delete buffer'
+        },
         e = {
                 name = '+explore/edit',
                 a = ' ~/.config/alacritty',
@@ -225,8 +229,23 @@ local keymaps = {
         M = 'clear :messages',
         O = 'newline above (no insert-mode)',
         o = 'newline below (no insert-mode)',
-        q = "toggle quickfix list on/off",
-        Q = "toggle location list on/off"
+        q = {
+            name = '+quickfix/location_list',
+            q = 'quickfix',
+            l = 'location list'
+        },
+        Q = 'Quit nvim',
+        w = {
+            name = '+window',
+            h = 'jump to right window',
+            j = 'jump to bottom window',
+            k = 'jump to top window',
+            l = 'jump to left window',
+            ['-'] = 'horizontal split',
+            ['|'] = 'vertically split',
+            d = 'close window',
+            s = 'save buffer in current window'
+        },
     },
     ['g'] = {
         ['<C-V>'] = 'visually select last yanked/pasted text',
