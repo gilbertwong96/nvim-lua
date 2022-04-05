@@ -171,6 +171,13 @@ local packer_startup = function(use)
 
     -- AI Assistant
     use { 'github/copilot.vim' }
+
+    -- Dash doc
+    use({
+        'mrjones2014/dash.nvim',
+        run = 'make install',
+    })
+    
 end
 
 
