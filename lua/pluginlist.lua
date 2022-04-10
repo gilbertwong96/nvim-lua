@@ -178,6 +178,7 @@ local packer_startup = function(use)
         run = 'make install',
     })
     
+    use({'dag/vim-fish'})
 end
 
 
