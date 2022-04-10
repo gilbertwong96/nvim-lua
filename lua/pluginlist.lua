@@ -102,12 +102,7 @@ local packer_startup = function(use)
        ft = { 'qf' } }
 
     -- statusline
-    use { 'tjdevries/express_line.nvim',
-       config = "require('plugins.statusline')",
-       requires = { 'nvim-lua/plenary.nvim' },
-       after = { 'plenary.nvim', 'nvim-web-devicons' },
-       event = 'VimEnter',
-    }
+    use 'beauwilliams/statusline.lua'
 
     -- Neoterm (REPLs)
     use { 'akinsho/toggleterm.nvim',
