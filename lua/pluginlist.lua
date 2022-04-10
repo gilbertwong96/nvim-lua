@@ -177,8 +177,12 @@ local packer_startup = function(use)
         'mrjones2014/dash.nvim',
         run = 'make install',
     })
-    
+
+    -- Edit fish files
     use({'dag/vim-fish'})
+
+    -- Monokai theme
+    use({'tanvirtin/monokai.nvim'})
 end
 
 
