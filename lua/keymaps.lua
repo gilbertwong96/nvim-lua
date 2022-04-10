@@ -44,7 +44,7 @@ vim.cmd([[
 ]])
 
 -- jk instead of escape
-remap({ 'n', 'i'}, 'jk', '<ESC>', {silent = true})
+remap({'i'}, 'jk', '<ESC>', {silent = true})
 
 -- <ctrl-s> to Save
 remap({ 'n', 'v', 'i'}, '<C-S>', '<cmd>:wa<cr>', { silent = true })
