@@ -11,6 +11,7 @@ local o = vim.opt
 -----------------
 
 -- Basic settings
+o.mouse = 'a'
 o.termguicolors = true -- set true color in terminal
 o.swapfile = true  -- Use a swapfile for the buffer.
 o.updatetime = 200 -- If this many milliseconds nothing is typed the swap file will be written to disk
@@ -90,7 +91,7 @@ o.ignorecase = true      -- ignore case on search
 o.smartcase = true      -- case sensitive when search includes uppercase
 o.showmatch = true      -- highlight matching [{()}]
 o.inccommand = 'nosplit' -- show search and replace in real time
-o.autoread = true  -- auto read file if changed outside of vim 
+o.autoread = true  -- auto read file if changed outside of vim
 o.wrapscan = true      -- begin search from top of the file when nothing is found
 vim.o.cpoptions = vim.o.cpoptions .. 'x' -- stay on search item when <esc>
 
