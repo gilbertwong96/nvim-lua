@@ -23,9 +23,9 @@ local on_attach = function(client, bufnr)
   -- map(bufnr, 'n', '<leader>lR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   -- use our own rename popup implementation
   map(bufnr, 'n', 'gR', '<cmd>lua require("lsp.rename").rename()<CR>', opts)
-  map(bufnr, 'n', '<leader>lR', '<cmd>lua require("lsp.rename").rename()<CR>', opts)
-  map(bufnr, 'n', '<leader>K',  '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  map(bufnr, 'n', '<leader>k', '<cmd>lua require("lsp.handlers").peek_definition()<CR>', opts)
+  map(bufnr, 'n', '<localleader>rr', '<cmd>lua require("lsp.rename").rename()<CR>', opts)
+  map(bufnr, 'n', '<localleader>Gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  map(bufnr, 'n', '<localleader>Gd', '<cmd>lua require("lsp.handlers").peek_definition()<CR>', opts)
 
   -- using fzf-lua instead
   --map(bufnr, 'n', '<leader>ls', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
@@ -40,7 +40,7 @@ local on_attach = function(client, bufnr)
     map(bufnr, 'n', '[d', ('<cmd>lua vim.lsp.diagnostic.goto_prev(%s)<CR>'):format(winopts), opts)
     map(bufnr, 'n', ']d', ('<cmd>lua vim.lsp.diagnostic.goto_next(%s)<CR>'):format(winopts), opts)
     map(bufnr, 'n', '<leader>lc', '<cmd>lua vim.lsp.diagnostic.clear(0)<CR>', opts)
-    map(bufnr, 'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    -- map(bufnr, 'n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
     map(bufnr, 'n', '<leader>lq', '<cmd>lua vim.lsp.diagnostic.set_qflist()<CR>', opts)
     map(bufnr, 'n', '<leader>lQ', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   else

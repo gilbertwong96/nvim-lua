@@ -148,7 +148,10 @@ local packer_startup = function(use)
         opt = true }
 
     -- markdown preview
-    use { 'ellisonleao/glow.nvim' }
+    use 'ellisonleao/glow.nvim'
+
+    -- markdown edit
+    use 'SidOfc/mkdx'
 
     -- DAP
     use { 'mfussenegger/nvim-dap',

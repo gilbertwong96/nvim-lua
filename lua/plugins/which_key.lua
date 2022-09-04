@@ -69,7 +69,8 @@ require("which-key").setup {
   ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
   show_help = true, -- show help message on the command line when the popup is visible
-  triggers = "auto", -- automatically setup triggers
+  triggers = { "<leader>", "<localleader>" },
+  -- triggers = "auto", -- automatically setup triggers
   -- triggers = {"<leader>"} -- or specify a list manually
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey
@@ -80,174 +81,195 @@ require("which-key").setup {
   },
 }
 
-local opts = {
+local leader_opts = {
     mode = "n", -- NORMAL mode
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    prefix = "<leader>",
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = false -- use `nowait` when creating keymaps
+}   
+
+local localleader_opts = {
+    mode = "n", -- NORMAL mode
+    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    prefix = "<localleader>",
     silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
     nowait = false -- use `nowait` when creating keymaps
 }
 
-local keymaps = {
-    ["<F1>"]      = ' find help tags',
-    ["<C-\\>"]    = 'Launch scratch terminal',
-    ["<C-L>"]     = 'Clear and redraw screen',
-    ["<C-K>"]     = ' find work dirs',
-    ["<C-P>"]     = ' find files',
-    ["."]         = 'Repeat last edit',
-    ['c.']        = 'search and replace word under cursor',
-    ["<up>"]      = 'Go up visual line',
-    ["<down>"]    = 'Go down visual line',
-    ["K"]         = 'LSP hover info under cursor',
-    ["<leader>"] = {
-        ['?'] = 'which key help',
-        ['"'] = 'toggle IndentBlankline on/off',
-        ['<F1>']    = 'Fuzzy find help tags',
-        ['<Up>']    = 'horizontal split increase',
-        ['<Down>']  = 'horizontal split decrease',
-        ['<Left>']  = 'vertical split decrease',
-        ['<Right>'] = 'vertical split increase',
-        ['%']       = "change pwd to current file's parent",
-        [';']       = ' buffers',
-        ['=']       = 'normalize split layout',
-        ['|']       = 'toggle color column on/off',
-        ['\'']      = "toggle 'listchars' on/off",
-        ['c.']      = 'search and replace WORD under cursor',
-        b = {
-                name = '+buffer',
-                d = 'delete buffer'
+local localleaderkeymaps = {
+    a = {
+          name = "+code actions",
+          a = "lsp_code_actions"
         },
-        e = {
-                name = '+explore/edit',
-                a = ' ~/.config/alacritty',
-                e = { ':NvimTreeToggle<CR>', 'nvim-tree on/off' },
-                f = { ':NvimTreeFindFile<CR>', 'nvim-tree current file' },
-                n = ' ~/.config/nvim',
-                i = "edit 'nvim/init.lua'",
-                k = "edit 'nvim/keymaps.lua'",
-                p = ' nvim plugins'
-            },
-        f = {
-                name = '+find (fzf)',
-                ['?'] = 'fzf-lua builtin commands',
-                ["/"] = ' search history',
-                [':'] = ' commands history',
-                ['"'] = ' registers',
-                p = 'files',
-                g = 'git files',
-                s = 'git status',
-                S = 'git status (fullscreen)',
-                C = 'git commits (project)',
-                c = 'git commits (buffer)',
-                H = 'file history (all)',
-                h = 'file history (cwd)',
-                B = 'buffer lines',
-                b = 'live grep (buffer)',
-                l = 'live grep (project)',
-                R = 'live grep (repeat)',
-                f = 'grep last search term',
-                r = 'grep prompt',
-                v = 'grep visual selection',
-                w = 'grep word under cursor',
-                W = 'grep WORD under cursor',
-                M = 'man pages',
-                m = 'marks',
-                o = 'color schemes',
-                O = 'highlight groups',
-                q = 'quickfix list',
-                Q = 'location list',
-                x = 'neovim commands',
-                k = 'neovim keymaps',
-                z = 'spell suggestions under cursor',
-                t = 'tags (buffer)',
-                T = 'tags (project)',
-            },
-        g = {
-                name = '+git',
-                g = 'Gedit',
-                s = 'git status',
-                r = 'Gread (reset)',
-                w = 'Gwrite (stage)',
-                a = 'git add (current file)',
-                A = 'git add (all)',
-                b = 'git blame',
-                B = 'git branches',
-                c = 'git commit',
-                d = 'git diff (buffer)',
-                D = 'git diff (project)',
-                S = 'git stash (current file)',
-                ['-'] = 'git stash (global)',
-                ['+'] = 'git stash pop',
-                p = 'git push',
-                P = 'git pull',
-                f = 'git fetch --all',
-                F = 'git fetch origin',
-                l = 'git log (current file)',
-                L = 'git log (global)',
-                e = 'Gedit HEAD~n (vertical)',
-                E = 'Gedit HEAD~n (horizontal)',
-             },
-        h = {
-            name = '+gitsigns',
-            b = 'git blame',
-            p = 'preview hunk',
-            r = 'reset hunk',
-            R = 'reset buffer',
-            s = 'stage hunk',
-            u = 'undo stage hunk',
+    g = {
+          name = "+goto",
+          r = "find references",
+          d = "goto definition",
+          D = "goto declaration",
+          t = "goto type definition",
+          i = "goto implementation",
+          s = "goto worksapce symbols"
         },
-        l = {
-            name = '+lsp',
-            a = 'code actions',
-            d = 'definitions',
-            D = 'declarations',
-            y = 'type definitions',
-            c = 'clear diagnostics',
-            g = 'diagnostics (buffer)',
-            G = 'diagnostics (project)',
-            m = 'implemtations',
-            s = 'symbols (buffer)',
-            S = 'symbols (project)',
-            r = 'references',
-            R = 'rename',
-            l = 'line diagnostics',
-            t = 'toggle diagnostics',
-            L = 'code lense',
-            Q = 'send diagnostics to loclist',
+    G = {
+          s = "signature help",
+          d = "peek definition"
         },
-        t = {
-             name = '+tab',
-             n = 'open a new tab',
-             c = 'close current tab',
-             o = 'close all other tabs (:tabonly)',
-             O = 'jump to first tab and close all others',
-             z = 'zoom current tab (tmux-z)',
-         },
-        k = 'peek definition  (LSP)',
-        K = 'signature help   (LSP)',
-        m = 'open :messages',
-        M = 'clear :messages',
-        O = 'newline above (no insert-mode)',
-        o = 'newline below (no insert-mode)',
-        q = {
-            name = '+quickfix/location_list',
-            q = 'quickfix',
-            l = 'location list'
-        },
-        Q = 'Quit nvim',
-        w = {
-            name = '+window',
-            h = 'jump to right window',
-            j = 'jump to bottom window',
-            k = 'jump to top window',
-            l = 'jump to left window',
-            ['-'] = 'horizontal split',
-            ['|'] = 'vertically split',
-            d = 'close window',
-            s = 'save buffer in current window'
-        },
+    r = {
+          name = "+refactor",
+          r = "lsp rename"
+        }
+}
+
+local leaderkeymaps = {
+    ["<F1>"]    = 'Find help tags',
+    ["<C-\\>"]  = 'Launch scratch terminal',
+    ["<tab>"]   = 'Next Buffer',
+    ["<C-L>"]   = 'Clear and redraw screen',
+    ["<C-K>"]   = 'Find work dirs',
+    ["<C-P>"]   = 'Find files',
+    ["\""]      = 'Toggle IndentBlankline on/off',
+    ["\'"]      = 'Toggle List Chars',
+    ["/"]       = 'Grep Project',
+    ["="]       = 'Balance windows area',
+    ["%"]       = "Change pwd to current file's parent",
+    ["."]       = 'Repeat last edit',
+    ["?"]       = 'Whichkey Help',
+    ['c.']      = 'Search and replace word under cursor',
+    ['|']       = 'Toggle color column on/off',
+    ['TAB']     = 'Next Buffer',
+    ["<up>"]    = 'Go up visual line',
+    ["<down>"]  = 'Go down visual line',
+    ['<Left>']  = 'vertical split decrease',
+    ['<Right>'] = 'vertical split increase',
+    b           = {
+                      name = '+buffer',
+                      b = 'buffers',
+                      n = 'next buffer',
+                      d = 'delete buffer',
+                      f = 'first buffer',
+                      l = 'last buffer'
+                  },
+    e           = {
+                      name = '+explore/edit',
+                      a = ' ~/.config/alacritty',
+                      e = { ':NvimTreeToggle<CR>', 'nvim-tree on/off' },
+                      f = { ':NvimTreeFindFile<CR>', 'nvim-tree current file' },
+                      i = "edit 'nvim/init.lua'",
+                      k = "edit 'nvim/keymaps.lua'",
+                      p = 'nvim plugins',
+                      o = "~/.config/omf"
+                      },
+    f           = {
+                      name = '+files/fzf',
+                      ['?'] = 'fzf-lua builtin commands',
+                      ["/"] = 'search history',
+                      [':'] = 'commands history',
+                      ['"'] = 'registers',
+                      s = 'save file',
+                      B = 'buffer lines',
+                      f = 'find file',
+                      r = 'recent file (all)',
+                      R = 'recent file (cwd)',
+                      v = 'grep visual selection',
+                      w = 'grep word under cursor',
+                      W = 'grep WORD under cursor',
+                      m = 'man pages',
+                      M = 'marks',
+                      o = 'color schemes',
+                      O = 'highlight groups',
+                      q = 'quickfix list',
+                      Q = 'location list',
+                      x = 'neovim commands',
+                      k = 'neovim keymaps',
+                      z = 'spell suggestions under cursor',
+                      t = 'tags (buffer)',
+                      T = 'tags (project)',
+                  },
+    g           = {
+                      name = '+git',
+                      s = 'git status',
+                      r = 'Gread (reset)',
+                      w = 'Gwrite (stage)',
+                      a = 'git add (current file)',
+                      A = 'git add (all)',
+                      b = 'git blame',
+                      B = 'git branches',
+                      c = 'git commit',
+                      S = 'git stash (current file)',
+                      ['-'] = 'git stash (global)',
+                      ['+'] = 'git stash pop',
+                      f = {
+                              name = '+files/fetch',
+                              f = 'git files',
+                              r = 'git fetch remote',
+                              a = 'git fetch all'
+                          },
+                      h = {
+                             name = '+hunk',
+                             p = 'preview hunk',
+                             s = 'stage hunk',
+                             r = 'reset hunk',
+                             R = 'reset buffer',
+                             u = 'undo stage hunk'
+                          },
+                      l = 'git log (current file)',
+                      L = 'git log (global)',
+                      ['/'] = 'git-grep',
+                      ['*'] = 'git-grep-at-point'
+                   },
+    h           = {
+                  name = '+help',
+                  t = 'Help tags'
     },
-    ['g'] = {
+    l           = {
+                  name = '+lsp',
+                  c = 'clear diagnostics',
+                  g = 'diagnostics (buffer)',
+                  G = 'diagnostics (project)',
+                  m = 'implemtations',
+                  s = 'symbols (buffer)',
+                  S = 'symbols (project)',
+                  r = 'references',
+                  R = 'rename',
+                  l = 'line diagnostics',
+                  t = 'toggle diagnostics',
+                  L = 'code lense',
+                  Q = 'send diagnostics to loclist',
+    },
+    t           = {
+                      name = '+tab',
+                      c = 'create a new tab',
+                      d = 'delete current tab',
+                      p = 'previous tab',
+                      n = 'next tab',
+                      o = 'close all other tabs (:tabonly)',
+                      O = 'jump to first tab and close all others',
+                      z = 'zoom current tab (like tmux-z)',
+                  }          ,
+    m           = 'open :messages',
+    M           = 'clear :messages',
+    q           = {
+                      name = '+quickfix/quit',
+                      q = 'quit nvim',
+                      l = 'quickfix list'
+                  },
+    Q           = 'Quit nvim',
+    w           = {
+                      name = '+window',
+                      h = 'jump to right window',
+                      j = 'jump to bottom window',
+                      k = 'jump to top window',
+                      l = 'jump to left window',
+                      ['-'] = 'horizontal split',
+                      ['|'] = 'vertically split',
+                      d = 'close window',
+                      s = 'horizontally split',
+                      v = 'vertically split'
+                  },
+    --[[ g = {
         ['<C-V>'] = 'visually select last yanked/pasted text',
         A = 'code action (LSP)',
         c = 'comment (motion)',
@@ -278,7 +300,7 @@ local keymaps = {
         -- m = { 'gm', 'goto middle of screen line' },
         M = 'goto middle of text line',
         F = 'Goto file:line under cursor',
-    },
+    }, ]]
     ['['] = {
             -- ['%'] = 'matching group prev',
             ['-'] = 'goto older error list',
@@ -316,5 +338,6 @@ local keymaps = {
 }
 
 local wk = require("which-key")
-wk.register(keymaps, opts)
+wk.register(leaderkeymaps, leader_opts)
+wk.register(localleaderkeymaps, localleader_opts)
 

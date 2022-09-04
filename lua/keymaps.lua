@@ -54,9 +54,10 @@ remap('c', 'w!!', "<esc>:lua require'utils'.sudo_write()<CR>", { silent = true }
 
 -- Beginning and end of line in `:` command mode
 remap('c', '<C-a>', '<home>', {})
-remap('c', '<C-e>', '<end>' , {})
-remap('c', '<C-b>', '<left>' , {})
-remap('c', '<C-f>', '<right>' , {})
+remap('c', '<C-e>', '<end>', {})
+remap('c', '<C-b>', '<left>', {})
+remap('c', '<C-f>', '<right>', {})
+remap('c', '<C-g>', '<esc>', {})
 
 -- Terminal mappings
 remap('t', '<M-[>', [[<C-\><C-n>]],      { noremap = true })
@@ -72,7 +73,7 @@ remap('n', '<leader><Left>',  "<cmd>lua require'utils'.resize(true,  -5)<CR>",
     { noremap = true, silent = true })
 remap('n', '<leader><Right>', "<cmd>lua require'utils'.resize(true,   5)<CR>",
     { noremap = true, silent = true })
-remap('n', '<leader>=',       '<C-w>=', { noremap = true, silent = true })
+remap('n', '<leader>=', '<C-w>=', { noremap = true, silent = true })
 
 -- Navigate window
 remap('n', '<leader>wh', '<C-w>h', { noremap = true, silent = true })
@@ -97,8 +98,10 @@ remap('n', '[t',         ':tabprevious<CR>', { noremap = true })
 remap('n', ']t',         ':tabnext<CR>',     { noremap = true })
 remap('n', '[T',         ':tabfirst<CR>',    { noremap = true })
 remap('n', ']T',         ':tablast<CR>',     { noremap = true })
-remap('n', '<Leader>tn', ':tabnew<CR>',      { noremap = true })
-remap('n', '<Leader>tc', ':tabclose<CR>',    { noremap = true })
+remap('n', '<Leader>tn', ':tabnext<CR>',      { noremap = true })
+remap('n', '<Leader>tp', ':tabprevious<CR>',      { noremap = true })
+remap('n', '<Leader>tc', ':tabnew<CR>',    { noremap = true })
+remap('n', '<Leader>td', ':tabclose<CR>',    { noremap = true })
 remap('n', '<Leader>to', ':tabonly<CR>',    { noremap = true })
 -- Jump to first tab & close all other tabs. Helpful after running Git difftool.
 remap('n', '<Leader>tO', ':tabfirst<CR>:tabonly<CR>', { noremap = true })
@@ -109,13 +112,19 @@ remap('n', '<Leader>tz',  "<cmd>lua require'utils'.tabZ()<CR>", { noremap = true
 remap('n', '<leader>bd', ':bw<CR>', { noremap = true, silent = true })
 
 -- Navigate buffers
+remap('n', '<leader><tab>', ':bnext<CR>', { noremap = true, silent = true })
+remap('n', '<leader>bn', ':bnext<CR>', { noremap = true, silent = true })
+remap('n', '<leader>bp', ':bprevious<CR>', { noremap = true, silent = true })
+remap('n', '<leader>bf', ':bfirst<CR>', { noremap = true, silent = true })
+remap('n', '<leader>bl', ':blast<CR>', { noremap = true, silent = true })
+
 remap('n', '[b', ':bprevious<CR>',      { noremap = true })
 remap('n', ']b', ':bnext<CR>',          { noremap = true })
 remap('n', '[B', ':bfirst<CR>',         { noremap = true })
 remap('n', ']B', ':blast<CR>',          { noremap = true })
 
 -- Quickfix list mappings
-remap('n', '<leader>ql', "<cmd>lua require'utils'.toggle_qf('q')<CR>", { noremap = true })
+remap('n', '<leader>qL', "<cmd>lua require'utils'.toggle_qf('q')<CR>", { noremap = true })
 remap('n', '[q', ':cprevious<CR>',      { noremap = true })
 remap('n', ']q', ':cnext<CR>',          { noremap = true })
 remap('n', '[Q', ':cfirst<CR>',         { noremap = true })
@@ -158,7 +167,7 @@ remap('n', '<Esc><Esc>', '<Esc>:nohlsearch<CR>', { noremap = true, silent = true
 -- Toggle display of `listchars`
 remap('n', '<leader>\'', '<Esc>:set list!<CR>',   { noremap = true, silent = true })
 
--- Toggle colored column at 81
+-- Toggle colored column at 100
 remap('n', '<leader>|',
     ':execute "set colorcolumn=" . (&colorcolumn == "" ? "100" : "")<CR>',
     { noremap = true, silent = true })

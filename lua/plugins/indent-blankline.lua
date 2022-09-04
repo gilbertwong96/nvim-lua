@@ -40,7 +40,7 @@ local opts = {
         "IndentBlanklineIndent4",
         "IndentBlanklineIndent5",
         "IndentBlanklineIndent6",
-    },  
+    },
 }
 
 if not pcall(require, "nvim-treesitter") then

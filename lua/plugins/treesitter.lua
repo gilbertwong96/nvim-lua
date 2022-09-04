@@ -31,9 +31,16 @@ require'nvim-treesitter.configs'.setup {
     -- slow on big files
     -- ugly for markdown
     disable = {
+        "erl", "erlang"
       -- "c", "cpp",
-      "md", "markdown",
-    }
+      -- "md", "markdown"
+    },
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false
   },
   incremental_selection = {
     enable = true,
@@ -48,28 +55,28 @@ require'nvim-treesitter.configs'.setup {
     select = {
       enable  = true,
       keymaps = {
-        ["ac"] = "@comment.outer"    ,
-        ["ao"] = "@class.outer"      ,
-        ["io"] = "@class.inner"      ,
-        ["af"] = "@function.outer"   ,
-        ["if"] = "@function.inner"   ,
+        -- ["ac"] = "@comment.outer"    ,
+        -- ["ao"] = "@class.outer"      ,
+        -- ["io"] = "@class.inner"      ,
+        -- ["af"] = "@function.outer"   ,
+        -- ["if"] = "@function.inner"   ,
         -- Leader mappings, dups for whichkey
-        ["<Leader><Leader>ab"] = "@block.outer"      ,
-        ["<Leader><Leader>ib"] = "@block.inner"      ,
-        ["<Leader><Leader>af"] = "@function.outer"   ,
-        ["<Leader><Leader>if"] = "@function.inner"   ,
-        ["<Leader><Leader>ao"] = "@class.outer"      ,
-        ["<Leader><Leader>io"] = "@class.inner"      ,
-        ["<Leader><Leader>aC"] = "@call.outer"       ,
-        ["<Leader><Leader>iC"] = "@call.inner"       ,
-        ["<Leader><Leader>ac"] = "@conditional.outer",
-        ["<Leader><Leader>ic"] = "@conditional.inner",
-        ["<Leader><Leader>al"] = "@loop.outer"       ,
-        ["<Leader><Leader>il"] = "@loop.inner"       ,
-        ["<Leader><Leader>ap"] = "@parameter.outer"  ,
-        ["<Leader><Leader>ip"] = "@parameter.inner"  ,
-        ["<Leader><Leader>is"] = "@scopename.inner"  ,
-        ["<Leader><Leader>as"] = "@statement.outer"  ,
+        -- ["<Leader><Leader>ab"] = "@block.outer"      ,
+        -- ["<Leader><Leader>ib"] = "@block.inner"      ,
+        -- ["<Leader><Leader>af"] = "@function.outer"   ,
+        -- ["<Leader><Leader>if"] = "@function.inner"   ,
+        -- ["<Leader><Leader>ao"] = "@class.outer"      ,
+        -- ["<Leader><Leader>io"] = "@class.inner"      ,
+        -- ["<Leader><Leader>aC"] = "@call.outer"       ,
+        -- ["<Leader><Leader>iC"] = "@call.inner"       ,
+        -- ["<Leader><Leader>ac"] = "@conditional.outer",
+        -- ["<Leader><Leader>ic"] = "@conditional.inner",
+        -- ["<Leader><Leader>al"] = "@loop.outer"       ,
+        -- ["<Leader><Leader>il"] = "@loop.inner"       ,
+        -- ["<Leader><Leader>ap"] = "@parameter.outer"  ,
+        -- ["<Leader><Leader>ip"] = "@parameter.inner"  ,
+        -- ["<Leader><Leader>is"] = "@scopename.inner"  ,
+        -- ["<Leader><Leader>as"] = "@statement.outer"  ,
       },
     },
     move = {

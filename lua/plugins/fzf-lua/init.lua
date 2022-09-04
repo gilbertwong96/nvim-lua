@@ -291,7 +291,7 @@ end
 function M.edit_fish(opts)
   if not opts then opts = {} end
   opts.prompt = "~ fish ~ "
-  opts.cwd = "$HOME/.config/fish"
+  opts.cwd = "$HOME/.config/omf"
   fzf_lua.files(opts)
 end
 

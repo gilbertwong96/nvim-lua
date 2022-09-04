@@ -92,9 +92,11 @@ cmp.setup {
     end,
   },
 
-  documentation = {
-    border       = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-    winhighlight = 'Normal:CursorLine,FloatBorder:CursorLine',
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered()
+    --[[ border       = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+    winhighlight = 'Normal:CursorLine,FloatBorder:CursorLine', ]]
   },
 
   formatting = {

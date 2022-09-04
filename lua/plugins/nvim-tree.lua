@@ -2,56 +2,10 @@
 -- https://github.com/ibhagwan/nvim-lua/blob/main/lua/plugins/nvim-tree.lua
 local remap = vim.api.nvim_set_keymap
 
-remap('', '<leader>te', "<Esc>:NvimTreeToggle<CR>",     { silent = true })
-remap('', '<leader>tf',  "<Esc>:NvimTreeFindFile<CR>",  { silent = true })
-
--- files that get highlighted with 'NvimTreeSpecialFile'
-vim.g.nvim_tree_special_files = {
-  ["README.md"]           = true,
-  ["LICENSE"]             = true,
-  ["Makefile"]            = true,
-  ["package.json"]        = true,
-  ["package-lock.json"]   = true,
-}
-
-vim.g.nvim_tree_show_icons = {
-  git = 1,
-  folders = 1,
-  files = 1,
-  folder_arrows = 1,
-}
-
-vim.g.nvim_tree_icons = {
-  default = "",
-  symlink = "",
-  git = {
-    -- staged      = "✓",
-    -- renamed     = "➜",
-    unstaged    = "★",
-    staged      = "+",
-    unmerged    = "",
-    renamed     = "→",
-    untracked   = "?",
-    deleted     = "✗",
-    ignored     = "◌",
-  },
-  folder = {
-    arrow_open      = "",
-    arrow_closed    = "",
-    default         = "",
-    open            = "",
-    empty           = "",
-    empty_open      = "",
-    symlink         = "",
-    symlink_open    = "",
-  },
-}
-
 require'nvim-tree'.setup {
-  auto_close          = true,
   open_on_setup       = false,
   open_on_tab         = false,
-  disable_netrw       = true,
+--[[   disable_netrw       = true, ]]
   hijack_netrw        = false,
   hijack_cursor       = false,
   update_cwd          = true,
@@ -73,7 +27,6 @@ require'nvim-tree'.setup {
   view = {
     width = 30,
     side = 'left',
-    auto_resize = false,
     mappings = {
       custom_only = false,
       list = {
