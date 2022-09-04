@@ -55,6 +55,8 @@ remap('c', 'w!!', "<esc>:lua require'utils'.sudo_write()<CR>", { silent = true }
 -- Beginning and end of line in `:` command mode
 remap('c', '<C-a>', '<home>', {})
 remap('c', '<C-e>', '<end>' , {})
+remap('c', '<C-b>', '<left>' , {})
+remap('c', '<C-f>', '<right>' , {})
 
 -- Terminal mappings
 remap('t', '<M-[>', [[<C-\><C-n>]],      { noremap = true })
