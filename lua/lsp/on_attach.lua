@@ -54,10 +54,10 @@ local on_attach = function(client, bufnr)
   end
 
   if client.resolved_capabilities.document_formatting then
-    map(bufnr, 'n', 'gq', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    map(bufnr, 'n', '<localleader>=b', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   end
   if client.resolved_capabilities.document_range_formatting then
-    map(bufnr, 'v', 'gq', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    map(bufnr, 'v', '<localleader>=', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
   end
 
   if client.resolved_capabilities.code_lens then
