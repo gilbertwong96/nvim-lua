@@ -26,7 +26,7 @@ o.showcmd = true
 o.cmdheight = 1
 o.laststatus = 2
 o.number = true
-o.relativenumber = true
+o.relativenumber = false
 o.cursorline = true
 o.signcolumn = 'yes'
 vim.g.colorcolumn = 100
@@ -198,7 +198,7 @@ vim.g.markdown_fenced_languages = {
 -- Map leader to <space>
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent=true})
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.maplocalleader = ','
 
 -- window-local options
 -- wo.number = true
