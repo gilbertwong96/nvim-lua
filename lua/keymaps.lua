@@ -79,14 +79,16 @@ remap('n', '<leader>wk', '<C-w>k', { noremap = true, silent = true })
 remap('n', '<leader>wl', '<C-w>l', { noremap = true, silent = true })
 
 -- Split window
-remap('n', '<leader>w-', ':sp<CR>', { noremap = true, silent = true })
-remap('n', '<leader>w|', ':vs<CR>', { noremap = true, silent = true })
+-- Horizentally Split
+remap('n', '<leader>ws', ':sp<CR>', { noremap = true, silent = true })
+-- Vertically Split
+remap('n', '<leader>wv', ':vs<CR>', { noremap = true, silent = true })
 
 -- Delete window
 remap('n', '<leader>wd', ':quit<CR>', { noremap = true, silent = true })
 
 -- Save file in current window
-remap('n', '<leader>ws', ':w<CR>', { noremap = true, silent = true })
+remap('n', '<leader>fs', ':w<CR>', { noremap = true, silent = true })
 
 -- Tab navigation
 remap('n', '[t',         ':tabprevious<CR>', { noremap = true })
@@ -111,7 +113,7 @@ remap('n', '[B', ':bfirst<CR>',         { noremap = true })
 remap('n', ']B', ':blast<CR>',          { noremap = true })
 
 -- Quickfix list mappings
-remap('n', '<leader>qq', "<cmd>lua require'utils'.toggle_qf('q')<CR>", { noremap = true })
+remap('n', '<leader>ql', "<cmd>lua require'utils'.toggle_qf('q')<CR>", { noremap = true })
 remap('n', '[q', ':cprevious<CR>',      { noremap = true })
 remap('n', ']q', ':cnext<CR>',          { noremap = true })
 remap('n', '[Q', ':cfirst<CR>',         { noremap = true })
@@ -163,4 +165,4 @@ remap('n', '<leader>|',
 remap('n', '<leader>%', '<Esc>:lua require"utils".set_cwd()<CR>', { noremap = true, silent = true })
 
 -- Quic neovim
-remap('n', '<leader>Q', ':qa<CR>', { noremap = true, silent = true })
+remap('n', '<leader>qq', ':qa <CR>', { noremap = true, silent = true })
