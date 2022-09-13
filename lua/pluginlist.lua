@@ -177,10 +177,14 @@ local packer_startup = function(use)
     })
 
     -- Edit fish files
-    use({'dag/vim-fish'})
+    use 'dag/vim-fish'
 
     -- Monokai theme
-    use({'tanvirtin/monokai.nvim'})
+    use 'tanvirtin/monokai.nvim'
+
+    -- Editor Config
+    use 'gpanders/editorconfig.nvim'
+
 end
 
 
