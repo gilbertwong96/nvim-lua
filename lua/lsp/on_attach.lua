@@ -53,14 +53,14 @@ local on_attach = function(client, bufnr)
     map(bufnr, 'n', '<leader>lQ', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
   end
 
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     map(bufnr, 'n', '<localleader>=b', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   end
-  if client.resolved_capabilities.document_range_formatting then
+  if client.server_capabilities.document_range_formatting then
     map(bufnr, 'v', '<localleader>=', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
   end
 
-  if client.resolved_capabilities.code_lens then
+  if client.server_capabilities.code_lens then
     map(bufnr, "n", "<leader>lL", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
     vim.api.nvim_command [[autocmd CursorHold,CursorHoldI,InsertLeave <buffer> lua vim.lsp.codelens.refresh()]]
   end
