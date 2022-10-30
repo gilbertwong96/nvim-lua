@@ -58,6 +58,7 @@ return packer.startup(function(use)
   use "goolord/alpha-nvim"
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
+  use "sheerun/vim-polyglot"
 
   -- Colorschemes
   use "tanvirtin/monokai.nvim"
@@ -72,7 +73,6 @@ return packer.startup(function(use)
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-nvim-lua"
-  use "sheerun/vim-polyglot"
 
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
