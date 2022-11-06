@@ -60,6 +60,7 @@ return packer.startup(function(use)
   use "folke/which-key.nvim"
   use "sheerun/vim-polyglot"
   use "gpanders/editorconfig.nvim"
+  use "christoomey/vim-tmux-navigator"
   -- faster nvim
   use {
     "PHSix/faster.nvim",
@@ -92,16 +93,16 @@ return packer.startup(function(use)
   use {
     "zbirenbaum/copilot.lua",
     event = "InsertEnter",
-    config = function ()
+    config = function()
       vim.schedule(function()
         require("copilot").setup()
       end)
     end
   }
-  use { 
+  use {
     "zbirenbaum/copilot-cmp",
     after = { "copilot.lua" },
-    config = function ()
+    config = function()
       require("copilot_cmp").setup()
     end
   }
@@ -133,6 +134,15 @@ return packer.startup(function(use)
 
   -- Git
   use "lewis6991/gitsigns.nvim"
+
+  -- Unused bug interesting plugins
+  -- Firenvim
+  --[[ use { ]]
+  --[[   "glacambre/firenvim", ]]
+  --[[   run = function() ]]
+  --[[     vim.fn["firenvim#install"](0) ]]
+  --[[   end, ]]
+  --[[ } ]]
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
