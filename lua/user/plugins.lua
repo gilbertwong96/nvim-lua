@@ -61,6 +61,7 @@ return packer.startup(function(use)
   use "sheerun/vim-polyglot"
   use "gpanders/editorconfig.nvim"
   use "christoomey/vim-tmux-navigator"
+  use "belltoy/prom.vim"
   -- faster nvim
   use {
     "PHSix/faster.nvim",
