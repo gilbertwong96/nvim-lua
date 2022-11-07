@@ -62,10 +62,11 @@ return packer.startup(function(use)
   use "gpanders/editorconfig.nvim"
   use "christoomey/vim-tmux-navigator"
   use "belltoy/prom.vim"
+  use "earthly/earthly.vim"
 
   -- Colorizer
   use {
-    'norcalli/nvim-colorizer.lua',
+    "norcalli/nvim-colorizer.lua",
     config = "require'colorizer'.setup()",
     cmd = { 'ColorizerAttachToBuffer', 'ColorizerDetachFromBuffer' },
     opt = true
