@@ -63,6 +63,7 @@ return packer.startup(function(use)
   use "christoomey/vim-tmux-navigator"
   use "belltoy/prom.vim"
   use "earthly/earthly.vim"
+  use "johnfrankmorgan/whitespace.nvim"
 
   -- Colorizer
   use {
