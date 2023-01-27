@@ -33,10 +33,14 @@ local options = {
   wrap = true,                              -- break lines between words
   scrolloff = 8,                            -- is one of my fav
   sidescrolloff = 8,
-  guifont = "DejaVuSansMono Nerd Font:h17"  -- the font used in graphical neovim applications
+  guifont = "DejaVuSansMono Nerd Font:h17", -- the font used in graphical neovim applications
+  --[[ list = true, ]]
 }
 
 vim.opt.shortmess:append "c"
+--[[ vim.opt.listchars:append("space:⋅") ]]
+
+
 
 for k, v in pairs(options) do
   vim.opt[k] = v
