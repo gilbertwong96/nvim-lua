@@ -29,6 +29,7 @@ if not status_ok then
   return
 end
 
+-- TODO
 -- Have packer use a popup window
 packer.init {
   display = {
@@ -89,21 +90,18 @@ return packer.startup(function(use)
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-nvim-lua"
+
+  -- Lua
   use {
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    config = function()
-      vim.schedule(function()
-        require("copilot").setup()
-      end)
-    end
-  }
-  use {
-    "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua" },
-    config = function()
-      require("copilot_cmp").setup()
-    end
+      "AmeerTaweel/todo.nvim",
+      requires = "nvim-lua/plenary.nvim",
+      config = function()
+          require("todo").setup {
+              -- your configuration comes here
+              -- or leave it empty to use the default settings
+              -- refer to the configuration section below
+          }
+      end
   }
 
   -- snippets
