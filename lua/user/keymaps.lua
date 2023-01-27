@@ -70,3 +70,11 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 vim.api.nvim_set_keymap('n', 'j', '<Plug>(accelerated_jk_gj)', {})
 vim.api.nvim_set_keymap('n', 'k', '<Plug>(accelerated_jk_gk)', {})
 
+
+-- Beginning and end of line in `:` command mode
+keymap('c', '<C-a>', '<home>', opts)
+keymap('c', '<C-e>', '<end>', opts)
+keymap('c', '<C-b>', '<left>', opts)
+keymap('c', '<C-f>', '<right>', opts)
+keymap('c', '<C-g>', '<esc>', opts)
+
