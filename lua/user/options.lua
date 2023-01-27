@@ -38,7 +38,6 @@ local options = {
 }
 
 vim.opt.shortmess:append "c"
---[[ vim.opt.listchars:append("space:⋅") ]]
 
 
 

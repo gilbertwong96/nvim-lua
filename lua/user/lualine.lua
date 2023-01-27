@@ -19,7 +19,7 @@ local diagnostics = {
 
 local diff = {
 	"diff",
-	colored = false,
+	colored = true,
 	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
   cond = hide_in_width
 }
@@ -48,6 +48,20 @@ local location = {
 	padding = 0,
 }
 
+local filename = {
+  "filename",
+  file_status = true  ,
+  newfile_status = false,
+  path = 1,
+  shorting_target = 40,
+  symbols = {
+    modified = '[+]',
+    readonly = '[-]',
+    unnamed = '[No Name]',
+    newfile = '[New]',
+  }
+}
+
 -- cool function for progress
 local progress = function()
 	local current_line = vim.fn.line(".")
@@ -72,8 +86,8 @@ lualine.setup({
 		always_divide_middle = true,
 	},
 	sections = {
-		lualine_a = { branch, diagnostics },
-		lualine_b = { mode },
+		lualine_a = { mode },
+		lualine_b = {},
 		lualine_c = {},
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_x = { diff, spaces, "encoding", filetype },
@@ -88,7 +102,14 @@ lualine.setup({
 		lualine_y = {},
 		lualine_z = {},
 	},
-	tabline = {},
+	tabline = {
+    lualine_a = { branch, diagnostics },
+    lualine_b = {},
+    lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = { filename },
+  },
 	extensions = {},
 })
 

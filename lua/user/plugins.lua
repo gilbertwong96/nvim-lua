@@ -1,150 +1,151 @@
-local fn = vim.fn
-
--- Automatically install packer
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system {
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
     "git",
     "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  }
-  print "Installing packer close and reopen Neovim..."
-  vim.cmd [[packadd packer.nvim]]
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
+
+local opts = {}
+
+local plugins = {
+  "tanvirtin/monokai.nvim",
+  "lunarvim/colorschemes", -- a bunch of snippets to use
+  "nvim-lua/plenary.nvim",
+  "windwp/nvim-autopairs",
+  "gpanders/editorconfig.nvim",
+  "belltoy/prom.vim",
+  "christoomey/vim-tmux-navigator",
+  {
+    "terrortylor/nvim-comment",
+    config = function()
+      require("nvim_comment").setup()
+    end
+  },
+  "rainbowhxch/accelerated-jk.nvim",
+  "nvim-lualine/lualine.nvim",
+  "nvim-tree/nvim-web-devicons",
+  "nvim-tree/nvim-tree.lua",
+  "johnfrankmorgan/whitespace.nvim",
+  { "moll/vim-bbye", lazy = true },
+  { "nvim-telescope/telescope.nvim", lazy = true},
+  { "nvim-telescope/telescope-media-files.nvim", lazy = true },
+  { "ahmedkhalf/project.nvim", lazy = true },
+  "lukas-reineke/indent-blankline.nvim",
+  "folke/which-key.nvim",
+
+  -- Colorizer
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function ()
+      require("colorizer").setup()
+    end,
+    cmd = { 'ColorizerAttachToBuffer', 'ColorizerDetachFromBuffer' }
+  },
+
+   -- cmp plugins
+  "hrsh7th/nvim-cmp", -- The completion plugin
+  "hrsh7th/cmp-buffer", -- buffer completions
+  "hrsh7th/cmp-path", -- path completions
+  "hrsh7th/cmp-cmdline", -- cmdline completions
+  "saadparwaiz1/cmp_luasnip", -- snippet completions
+  "hrsh7th/cmp-nvim-lsp",
+  "hrsh7th/cmp-nvim-lua",
+
+  -- snippets
+  "L3MON4D3/LuaSnip",
+  "rafamadriz/friendly-snippets", -- a bunch of snippets to use
+
+  -- Treesitter
+  {"nvim-treesitter/nvim-treesitter", lazy = true},
+  {"nvim-treesitter/playground", lazy = true},
+
+  -- Copilot
+  -- "github/copilot.vim",
+  {
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    config = function()
+      vim.schedule(function()
+        require("copilot").setup()
+      end)
+    end
+  },
+  
+  {
+    "zbirenbaum/copilot-cmp",
+    dependencies = { "copilot.lua" },
+    config = function()
+      require("copilot_cmp").setup()
+    end
+  },
+
+  -- Git
+  "lewis6991/gitsigns.nvim",
+
+  -- TO DO
+  {
+    "AmeerTaweel/todo.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+        require("todo").setup()
+    end
+  },
+
+  -- LSP
+  "neovim/nvim-lspconfig",
+  { "williamboman/mason.nvim", lazy = true }, -- simple to use language server installer
+  { "williamboman/mason-lspconfig.nvim", lazy = true }, -- simple to use language server installer
+  "jose-elias-alvarez/null-ls.nvim", -- for formatters and linters
+  {
+    "goolord/alpha-nvim",
+    event = 'VimEnter',
+    dependencies = { {'nvim-tree/nvim-web-devicons'}}
+  }
+}
+
+require("lazy").setup(plugins, opts)
+
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd [[
-  augroup packer_user_config
+  augroup lazy_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+    autocmd BufWritePost plugins.lua Lazy install
   augroup end
 ]]
 
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-  return
-end
 
--- TODO
--- Have packer use a popup window
-packer.init {
-  display = {
-    open_fn = function()
-      return require("packer.util").float { border = "rounded" }
-    end,
-  },
-}
+
 
 -- Install your plugins here
-return packer.startup(function(use)
-  -- My plugins here
-  use "wbthomason/packer.nvim" -- Have packer manage itself
-  use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-  use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
-  use "numToStr/Comment.nvim" -- Easily comment stuff
-  use "kyazdani42/nvim-web-devicons"
-  use "kyazdani42/nvim-tree.lua"
-  use "akinsho/bufferline.nvim"
-  use "moll/vim-bbye"
-  use "nvim-lualine/lualine.nvim"
-  use "akinsho/toggleterm.nvim"
-  use "ahmedkhalf/project.nvim"
-  use "lewis6991/impatient.nvim"
-  use "lukas-reineke/indent-blankline.nvim"
-  use "goolord/alpha-nvim"
-  use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
-  use "folke/which-key.nvim"
-  use "sheerun/vim-polyglot"
-  use "gpanders/editorconfig.nvim"
-  use "christoomey/vim-tmux-navigator"
-  use "belltoy/prom.vim"
-  use "earthly/earthly.vim"
-  use "johnfrankmorgan/whitespace.nvim"
-
-  -- Colorizer
-  use {
-    "norcalli/nvim-colorizer.lua",
-    config = "require'colorizer'.setup()",
-    cmd = { 'ColorizerAttachToBuffer', 'ColorizerDetachFromBuffer' },
-    opt = true
-  }
-
-  -- accelerated-jk nvim
-  use "rainbowhxch/accelerated-jk.nvim"
-
-  -- Colorschemes
-  use "tanvirtin/monokai.nvim"
-  -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-  -- use "lunarvim/darkplus.nvim"
-
-  -- cmp plugins
-  use "hrsh7th/nvim-cmp" -- The completion plugin
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
-  use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-nvim-lua"
-
-  -- Lua
-  use {
-      "AmeerTaweel/todo.nvim",
-      requires = "nvim-lua/plenary.nvim",
-      config = function()
-          require("todo").setup {
-              -- your configuration comes here
-              -- or leave it empty to use the default settings
-              -- refer to the configuration section below
-          }
-      end
-  }
-
-  -- snippets
-  use "L3MON4D3/LuaSnip" --snippet engine
-  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
-
-
-  -- LSP
-  use "neovim/nvim-lspconfig" -- enable LSP
-  use "williamboman/mason.nvim" -- simple to use language server installer
-  use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
-  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
-
-  -- Telescope
-  use "nvim-telescope/telescope.nvim"
-  use "nvim-telescope/telescope-media-files.nvim"
-
-  -- Treesitter
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-  }
-
-  use "JoosepAlviste/nvim-ts-context-commentstring"
-  use "p00f/nvim-ts-rainbow"
-  use "nvim-treesitter/playground"
-
-  -- Git
-  use "lewis6991/gitsigns.nvim"
-
-  -- Unused bug interesting plugins
-  -- Firenvim
-  --[[ use { ]]
-  --[[   "glacambre/firenvim", ]]
-  --[[   run = function() ]]
-  --[[     vim.fn["firenvim#install"](0) ]]
-  --[[   end, ]]
-  --[[ } ]]
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
-
-end)
+--[[ return packer.startup(function(use) ]]
+--[[   -- My plugins here ]]
+--[[   use "lewis6991/impatient.nvim" ]]
+--
+--[[   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight ]]
+--[[   use "folke/which-key.nvim" ]]
+--[[   use "sheerun/vim-polyglot" ]]
+--[[   use "belltoy/prom.vim" ]]
+--
+--[[   use "earthly/earthly.vim" ]]
+--[[   use "johnfrankmorgan/whitespace.nvim" ]]
+--[[]]
+--[[   -- accelerated-jk nvim ]]
+--[[]]
+--[[   -- Colorschemes ]]
+--[[   use "tanvirtin/monokai.nvim" ]]
+--[[   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out ]]
+--[[   -- use "lunarvim/darkplus.nvim" ]]
+--[[]]
+--[[   -- Lua ]]
+--[[   -- Git ]]
+--[[   use "lewis6991/gitsigns.nvim" ]]
+--[[]]
+--[[]]
+--[[ end) ]]

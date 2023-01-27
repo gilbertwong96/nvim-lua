@@ -22,6 +22,7 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 end
 
+
 --   פּ ﯟ   some other good icons
 local kind_icons = {
   Copilot = "ﯙ",
