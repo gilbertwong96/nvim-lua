@@ -105,6 +105,13 @@ local plugins = {
   { "williamboman/mason.nvim", lazy = true }, -- simple to use language server installer
   { "williamboman/mason-lspconfig.nvim", lazy = true }, -- simple to use language server installer
   "jose-elias-alvarez/null-ls.nvim", -- for formatters and linters
+  { "j-hui/fidget.nvim",
+    config = function ()
+        require("fidget").setup()
+    end
+  },
+
+  -- Dashboard
   {
     "goolord/alpha-nvim",
     event = 'VimEnter',
@@ -116,39 +123,11 @@ require("lazy").setup(plugins, opts)
 
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd [[
-  augroup lazy_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua Lazy install
-  augroup end
-]]
+-- vim.cmd [[
+--   augroup lazy_user_config
+--     autocmd!
+--     autocmd BufWritePost plugins.lua Lazy install
+--   augroup end
+-- ]]
 
 
-
-
--- Install your plugins here
---[[ return packer.startup(function(use) ]]
---[[   -- My plugins here ]]
---[[   use "lewis6991/impatient.nvim" ]]
---
---[[   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight ]]
---[[   use "folke/which-key.nvim" ]]
---[[   use "sheerun/vim-polyglot" ]]
---[[   use "belltoy/prom.vim" ]]
---
---[[   use "earthly/earthly.vim" ]]
---[[   use "johnfrankmorgan/whitespace.nvim" ]]
---[[]]
---[[   -- accelerated-jk nvim ]]
---[[]]
---[[   -- Colorschemes ]]
---[[   use "tanvirtin/monokai.nvim" ]]
---[[   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out ]]
---[[   -- use "lunarvim/darkplus.nvim" ]]
---[[]]
---[[   -- Lua ]]
---[[   -- Git ]]
---[[   use "lewis6991/gitsigns.nvim" ]]
---[[]]
---[[]]
---[[ end) ]]
