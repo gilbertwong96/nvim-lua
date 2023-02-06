@@ -57,6 +57,9 @@ local plugins = {
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-nvim-lua",
 
+  -- Efficiency
+  "wakatime/vim-wakatime",
+
   -- snippets
   "L3MON4D3/LuaSnip",
   "rafamadriz/friendly-snippets", -- a bunch of snippets to use
