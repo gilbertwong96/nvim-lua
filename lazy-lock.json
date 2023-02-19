@@ -38,6 +38,7 @@
   "telescope.nvim": { "branch": "master", "commit": "dce1156ca103b8222e4abbfc63f9c6887abf5ec6" },
   "todo.nvim": { "branch": "master", "commit": "6bd31dfd64b2730b33aad89423a1055c22fe276a" },
   "vim-bbye": { "branch": "master", "commit": "25ef93ac5a87526111f43e5110675032dbcacf56" },
+  "vim-just": { "branch": "master", "commit": "838c9096d4c5d64d1000a6442a358746324c2123" },
   "vim-tmux-navigator": { "branch": "master", "commit": "cdd66d6a37d991bba7997d593586fc51a5b37aa8" },
   "vim-wakatime": { "branch": "master", "commit": "413e9c4e44baaeb60beded33e26c37d9d22130b0" },
   "which-key.nvim": { "branch": "main", "commit": "684e96c5e8477f1ee9b3f2e9a12d802fd12c5531" },

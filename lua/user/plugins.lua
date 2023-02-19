@@ -39,6 +39,9 @@ local plugins = {
   "lukas-reineke/indent-blankline.nvim",
   "folke/which-key.nvim",
 
+  -- Justfile
+  "NoahTheDuke/vim-just",
+
   -- Colorizer
   {
     "norcalli/nvim-colorizer.lua",
