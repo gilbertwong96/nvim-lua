@@ -39,6 +39,14 @@ local plugins = {
   "lukas-reineke/indent-blankline.nvim",
   "folke/which-key.nvim",
 
+  -- Maxmimize.nvim
+  {
+    'declancm/maximize.nvim',
+    config = function ()
+      require('maximize').setup()
+    end
+  },
+
   -- Justfile
   "NoahTheDuke/vim-just",
 
