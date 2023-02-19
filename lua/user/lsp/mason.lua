@@ -9,7 +9,9 @@ local servers = {
   "elixirls",
   "rust_analyzer",
 --"yamlls",
-  "erlangls"
+  "erlangls",
+  "jdtls",
+  "clangd"
 }
 
 local settings = {
